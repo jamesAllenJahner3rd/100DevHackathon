@@ -5,13 +5,14 @@ const dotenv = require('dotenv');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('passport');
+// const dragula = require("dragula");
 
 const indexRoutes = require('./routes/indexRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const loginRoutes = require('./routes/loginRoutes');
 const postRoutes = require('./routes/postRoutes');
 const projectRoutes = require('./routes/projectRoutes');
-
+const { notFound, errorHandler } = require('./middleware/errorMiddleware'); 
 
 const morgan = require('morgan')
 const connectDB = require("./config/database");
@@ -35,8 +36,6 @@ const PORT = process.env.PORT ||  8000;
 if (process.env.NODE_ENV ==='development'){
     app. use(morgan('dev'))
 }
-// EJS
-app.set('view engine', 'ejs');
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -76,7 +75,6 @@ app.use((req, res, next) => {
     next();
 });
 
-
 //static folder
 app.use(express.static(path.join(__dirname,"public")));
 
@@ -87,6 +85,10 @@ app.use('/profile', profileRoutes);
 app.use('/login', loginRoutes);
 app.use('/post', postRoutes);
 app.use('/project', projectRoutes);
+
+// Error Handling Middleware
+app.use(notFound);
+app.use(errorHandler);
 
 //NODE_ENV is going to let us know what stage of development we're in when booting.
 app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`));

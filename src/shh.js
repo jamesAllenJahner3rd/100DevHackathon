@@ -1,6 +1,0 @@
-const shh ={
-PROJECT_ID :'67b01be00018c90bde37',
-DATABASE_ID :'67b01f96000e1bd017f0',
-COLLECTION_ID :'67b01fa60001f06c8efd',
-}
-export {shh}

@@ -1,15 +1,8 @@
-# project_manager
-A project manager for software engineers
+# React + Vite
 
-## Dependencies
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-- [nodemon](https://www.npmjs.com/package/nodemon)
-- [dotenv](https://www.npmjs.com/package/dotenv)
-- [ejs](https://www.npmjs.com/package/ejs)
-- [express](https://www.npmjs.com/package/express)
-- [method-override](https://www.npmjs.com/package/method-override)
+Currently, two official plugins are available:
 
-## Installation
-
-- do installation by running `npm install` inside of your terminal 
-- do `npm run dev` and go to `localhost:8000` on your browser
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
