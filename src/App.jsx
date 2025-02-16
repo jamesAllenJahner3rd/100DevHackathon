@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Route,
   createBrowserRouter,
@@ -11,8 +12,11 @@ import NotFoundPage from './pages/NotFoundPage';
 import JobPage, { jobLoader } from './pages/JobPage';
 import AddJobPage from './pages/AddJobPage';
 import EditJobPage from './pages/EditJobPage';
+import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 const App = () => {
+  const [data, setData] = useState("Not Found");
+
   // Add New Job
   const addJob = async (newJob) => {
     const res = await fetch('/api/jobs', {
@@ -66,6 +70,22 @@ const App = () => {
     )
   );
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <div className="flex justify-center items-center flex-col">
+        <BarcodeScannerComponent
+          width={500}
+          height={500}
+          onUpdate={(err, result) => {
+            if (result) setData(result.text);
+            else setData("Not Found");
+          }}
+        />
+        <p className="mt-4 text-lg">{data}</p>
+      </div>
+      <RouterProvider router={router} />
+    </>
+  );
 };
+
 export default App;
