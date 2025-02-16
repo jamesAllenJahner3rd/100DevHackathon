@@ -1,6 +1,6 @@
-# React Jobs Project (YouTube)
+# Refrigerator foods Project (100Devs)
 
-This is the jobs listing project from the [YouTube crash course](https://youtu.be/LDB4uaJ87e0).
+This is the foods listing project from the 100Devs Hackathon.
 
 <img src="public/screen.png" />
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+jobimport React, { useState } from 'react';
 import {
   Route,
   createBrowserRouter,
@@ -8,11 +8,11 @@ import {
 import shhh from './shhh.js';
 import MainLayout from './layouts/MainLayout';
 import HomePage from './pages/HomePage';
-import JobsPage from './pages/JobsPage';
+import FoodsPage from './pages/FoodsPage';
 import NotFoundPage from './pages/NotFoundPage';
-import JobPage, { jobLoader } from './pages/JobPage';
-import AddJobPage from './pages/AddJobPage';
-import EditJobPage from './pages/EditJobPage';
+import FoodPage, { foodLoader } from './pages/FoodPage';
+import AddFoodPage from './pages/AddFoodPage.jsx';
+import EditFoodPage from './pages/EditFoodPage';
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 import { Client, Databases, ID } from "appwrite";
@@ -36,10 +36,8 @@ const promise = databases.createDocument(
       "upc": "037600216296",
       "brand": "Hormel",
       "model": "Tamales in Chili Sauce",
-      "color": "Gold",
-      "size": "Package size of 15.0 oz",
-      "dimension": "12 X 5 X 8 inches",
-      "weight": "180 ounces",
+      "location": "Gold",
+      "checkdate": "9999-12-31 23:59:59",
       "category": "Food, Beverages & Tobacco > Food Items > Snack Foods > Crackers",
       "images": [
         "http://c.shld.net/rpx/i/s/i/spin/10127449/prod_ec_1577405702",
@@ -53,53 +51,53 @@ promise.then(function (response) {
   console.log(error);
 });
 
-  // // Add New Job
-  // const addJob = async (newJob) => {
-  //   const res = await fetch('/api/jobs', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(newJob),
-  //   });
-  //   return;
-  // };
+  // Add New Food
+  const addFood = async (newFood) => {
+    const res = await fetch('/api/foods', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newFood),
+    });
+    return;
+  };
 
-  // // Delete Job
-  // const deleteJob = async (id) => {
-  //   const res = await fetch(`/api/jobs/${id}`, {
-  //     method: 'DELETE',
-  //   });
-  //   return;
-  // };
+  // Delete Food
+  const deleteFood = async (id) => {
+    const res = await fetch(`/api/foods/${id}`, {
+      method: 'DELETE',
+    });
+    return;
+  };
 
-  // // Update Job
-  // const updateJob = async (job) => {
-  //   const res = await fetch(`/api/jobs/${job.id}`, {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(job),
-  //   });
-  //   return;
-  // };
+  // Update Food
+  const updateFood = async (food) => {
+    const res = await fetch(`/api/foods/${food.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(food),
+    });
+    return;
+  };
 
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<MainLayout />}>
         <Route index element={<HomePage />} />
-        <Route path='/jobs' element={<JobsPage />} />
-        <Route path='/add-job' element={<AddJobPage addJobSubmit={addJob} />} />
+        <Route path='/foods' element={<FoodsPage />} />
+        <Route path='/add-food' element={<AddFoodPage addFoodSubmit={addFood} />} />
         <Route
-          path='/edit-job/:id'
-          element={<EditJobPage updateJobSubmit={updateJob} />}
-          loader={jobLoader}
+          path='/edit-food/:id'
+          element={<EditFoodPage updateFoodSubmit={updateFood} />}
+          loader={foodLoader}
         />
         <Route
-          path='/jobs/:id'
-          element={<JobPage deleteJob={deleteJob} />}
-          loader={jobLoader}
+          path='/foods/:id'
+          element={<FoodPage deleteFood={deleteFood} />}
+          loader={foodLoader}
         />
         <Route path='*' element={<NotFoundPage />} />
       </Route>
