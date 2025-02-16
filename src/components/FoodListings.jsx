@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import shhh from '../shhh.js';
-import foodListing from './FoodListing';
+import Foodlisting from './Foodlisting';
 import Spinner from './Spinner';
 import { Client, Databases, Query } from "appwrite";
 
@@ -10,7 +10,7 @@ const client = new Client()
 
 const databases = new Databases(client);
 
-const foodListings = ({ isHome = false }) => {
+const Foodlistings = ({ isHome = false }) => {
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -18,8 +18,8 @@ const foodListings = ({ isHome = false }) => {
     const fetchFoods = async () => {
       try {
         const response = await databases.listDocuments(
-          shhh.DATABASE_ID,//verify the database id
-          shhh.ITEM_ID,//verify the item id
+          shhh.DATABASE_ID, // verify the database id
+          shhh.ITEM_ID, // verify the item id
           [
             Query.limit(isHome ? 3 : 100) // Adjust the limit based on isHome
           ]
@@ -32,12 +32,6 @@ const foodListings = ({ isHome = false }) => {
         setLoading(false);
       }
     };
-  
-  // promise.then(function (response) {
-  //     console.log(response);
-  // }, function (error) {
-  //     console.log(error);
-  // });
 
     fetchFoods();
   }, [isHome]);
@@ -54,7 +48,7 @@ const foodListings = ({ isHome = false }) => {
         ) : (
           <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
             {foods.map((food) => (
-              <foodListing key={food.id} food={food} />
+              <Foodlisting key={food.$id} food={food} />
             ))}
           </div>
         )}
@@ -63,4 +57,4 @@ const foodListings = ({ isHome = false }) => {
   );
 };
 
-export default foodListings;
+export default Foodlistings;
