@@ -41,3 +41,18 @@ npm run build
 ```bash
 npm run preview
 ```
+
+## Security Notice
+
+⚠️ This repository was cleaned of sensitive data on [DATE]. If you cloned before this date:
+1. Delete your local clone
+2. Clone a fresh copy
+3. Set up your local environment variables using `.env.example` as a template
+
+```bash
+# Fresh clone and setup
+git clone https://github.com/jamesAllenJahner3rd/100DevHackathon.git
+cd refrigerator
+cp .env.example .env
+# Edit .env with your actual values
+```

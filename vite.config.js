@@ -47,7 +47,7 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/upc/, '/product'),
         secure: false,
         headers: {
-          'Authorization': 'Bearer DD29C03F5CD23BF4C7C3060F5AFA7BC4'
+          'Authorization': `Bearer ${process.env.VITE_UPC_API_TOKEN}`
         }
       }
     },
