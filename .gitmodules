@@ -1,0 +1,3 @@
+[submodule "100DevHackathon"]
+    path = 100DevHackathon
+    url = https://github.com/jamesAllenJahner3rd/100DevHackathon.git
