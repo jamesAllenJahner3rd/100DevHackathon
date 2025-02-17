@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-
+import dotenv from 'dotenv';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
@@ -18,7 +18,7 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api\/product/, '/product'),
         secure: false,
         headers: {
-          'Authorization': 'Bearer DD29C03F5CD23BF4C7C3060F5AFA7BC4'
+          'Authorization': `Bearer ${process.env.VITE_UPC_API_TOKEN}`
         }
       },
       '/upcapi': {
@@ -38,7 +38,7 @@ export default defineConfig({
           });
         },
         headers: {
-          'Authorization': 'Bearer DD29C03F5CD23BF4C7C3060F5AFA7BC4'
+          'Authorization': `Bearer ${process.env.VITE_UPC_API_TOKEN}`
         }
       },
       '/upc': {

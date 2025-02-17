@@ -2,7 +2,7 @@
 
 This is the foods listing project from the 100Devs Hackathon.
 
-<img src="public/screen.png" />
+<img src="public/screen.png" /> 
 
 ## Usage
 
