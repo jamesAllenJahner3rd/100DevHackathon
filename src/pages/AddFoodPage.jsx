@@ -73,24 +73,28 @@ const AddFoodPage = ({ addFoodSubmit }) => {
   const submitForm = async (e) => {
     e.preventDefault();
 
-    const newFood = {
-      title,
-      upc,
-      brand,
-      model,
-      location,
-      category,
-      images,
-      description,
-      checkdate,
-    };
-
-    console.log('Submitting new food:', newFood);
-
-    await addFoodSubmit(newFood);
-    e.target.reset();
-    toast.success('Food Added Successfully');
-    navigate('/foods');
+    try {
+      const newFood = {
+        title,
+        upc,
+        brand,
+        model,
+        location,
+        category,
+        images,
+        description,
+        checkdate,
+      };
+  
+      console.log('Submitting new food:', newFood);
+  
+      await addFoodSubmit(newFood);
+      toast.success('Food Added Successfully');
+      navigate('/add-food');
+    } catch (error) {
+      console.error('Error submitting food:', error);
+      toast.error('Failed to add food');
+    }
   };
 
   return (

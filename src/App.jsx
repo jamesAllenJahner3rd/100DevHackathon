@@ -43,18 +43,18 @@ const App = () => {
       console.log(error);
     });
 
-    // Fetch call to your API
-    const res = await fetch('/api/foods', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newFood),
-    });
+    // // Fetch call to your API
+    // const res = await fetch('/api/foods', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(newFood),
+    // });
 
-    if (!res.ok) {
-      console.error('Failed to add food via API');
-    }
+    // if (!res.ok) {
+    //   console.error('Failed to add food via API');
+    // }
 
     return;
   };
