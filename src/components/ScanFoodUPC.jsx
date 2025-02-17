@@ -6,26 +6,64 @@ const ScanFoodUPC = () => {
   const [isScanning, setIsScanning] = useState(false);
   const beepSound = new Audio("../src/assets/sounds/beep.ogg");
 
-  const handleScan = (err, result) => {
-    // Only process if scanning is active
+  const fetchUPCData = async (upc) => {
+    try {
+      console.log('Fetching UPC:', upc);
+      
+      const response = await fetch(`/upc/${upc}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Raw API Response:', data);
+
+      if (data.success === true) {
+        const productData = {
+          title: data.title || '',
+          upc: data.barcode || '',
+          brand: data.brand || '',
+          description: data.description || '',
+          model: data.metadata?.ingredients || '',
+          category: data.category === 'Food' ? 'Other' : data.category
+        };
+
+        console.log('Processed UPC Data:', productData);
+        return productData;
+      }
+    } catch (error) {
+      console.error('Error fetching UPC data:', error);
+      return null;
+    }
+  };
+
+  const handleScan = async (err, result) => {
     if (!isScanning) {
       return;
     }
 
     if (result) {
-      // Valid barcode found
       const scannedData = result.text;
       console.log('Valid UPC found:', scannedData);
       setData(scannedData);
       beepSound.play().catch(err => console.error('Error playing beep:', err));
-      setIsScanning(false); // Stop scanning after successful scan
+      setIsScanning(false);
+      
+      // Fetch and log UPC data
+      await fetchUPCData(scannedData);
     }
   };
 
   const toggleScanning = () => {
     setIsScanning(!isScanning);
     if (!isScanning) {
-      setData("Not Found"); // Reset data when starting new scan
+      setData("Not Found");
     }
   };
 
