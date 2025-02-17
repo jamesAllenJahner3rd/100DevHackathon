@@ -5,7 +5,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from 'react-router-dom';
-import shhh from './shhh.js';
+
 import MainLayout from './layouts/MainLayout';
 import HomePage from './pages/HomePage';
 import FoodsPage from './pages/FoodsPage';
@@ -23,7 +23,7 @@ const App = () => {
   // APPWRITE DATABASE CONNECTION
   const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject(shhh.PROJECT_ID);
+    .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID);
 
   const databases = new Databases(client);
 
@@ -31,8 +31,8 @@ const App = () => {
   const addFood = async (newFood) => {
     // Appwrite createDocument call
     const promise = databases.createDocument(
-      shhh.DATABASE_ID,
-      shhh.ITEM_ID,
+      import.meta.env.VITE_APPWRITE_DATABASE_ID,
+      import.meta.env.VITE_APPWRITE_ITEM_ID,
       ID.unique(),
       newFood
     );

@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
-import shhh from '../shhh.js';
 import Foodlisting from './Foodlisting';
 import Spinner from './Spinner';
 import { Client, Databases, Query } from "appwrite";
 
 const client = new Client()
   .setEndpoint("https://cloud.appwrite.io/v1")
-  .setProject(shhh.PROJECT_ID);
-
+  .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID);
 const databases = new Databases(client);
 
 const Foodlistings = ({ isHome = false }) => {
@@ -18,8 +16,8 @@ const Foodlistings = ({ isHome = false }) => {
     const fetchFoods = async () => {
       try {
         const response = await databases.listDocuments(
-          shhh.DATABASE_ID, // verify the database id
-          shhh.ITEM_ID, // verify the item id
+          import.meta.env.VITE_APPWRITE_DATABASE_ID,
+          import.meta.env.VITE_APPWRITE_ITEM_ID,
           [
             Query.limit(isHome ? 3 : 100) // Adjust the limit based on isHome
           ]
