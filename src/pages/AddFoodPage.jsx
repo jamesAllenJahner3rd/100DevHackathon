@@ -12,24 +12,62 @@ const AddFoodPage = ({ addFoodSubmit }) => {
   const [checkdate, setCheckdate] = useState('');
   const [category, setCategory] = useState('Fruit');
   const [images, setImages] = useState([]);
+  const [selectedWeeks, setSelectedWeeks] = useState('1'); // Add this new state
 
   const navigate = useNavigate();
 
   const addWeeksToDate = (dateObj, numberOfWeeks) => {
-    const newDate = new Date(dateObj);
-    console.log(newDate);
-    newDate.setDate(newDate.getDate() + numberOfWeeks * 7);
-    console.log(newDate);
-    return newDate.toISOString().split('T')[0];
+    try {
+      // Create a new date object to avoid mutating the original
+      const newDate = new Date(dateObj);
+      // Add weeks (7 days * number of weeks)
+      const daysToAdd = numberOfWeeks * 7;
+      newDate.setDate(newDate.getDate() + daysToAdd);
+  
+      // Debug logging
+      alert(`
+        Adding weeks:
+        Original date: ${dateObj}
+        Weeks to add: ${numberOfWeeks}
+        Days to add: ${daysToAdd}
+        New date: ${newDate.toISOString()}
+      `);
+  
+      return newDate.toISOString();
+    } catch (error) {
+      console.error('Error in addWeeksToDate:', error);
+      alert('Error adding weeks to date: ' + error.message);
+      return null;
+    }
   };
-
+  
   const handleCheckdateChange = (e) => {
-    console.log("e");
-    const numberOfWeeks = parseInt(e.target.value, 10);
-    console.log("numberOfWeeks",numberOfWeeks);
-    const newCheckdate = addWeeksToDate(new Date(), numberOfWeeks);
-    onsole.log("newCheckdate",newCheckdate);
-    setCheckdate(newCheckdate);
+    try {
+      // Get the number of weeks from the select option
+      const weeks = e.target.value;
+      setSelectedWeeks(weeks); // Update the select value
+      const numberOfWeeks = parseInt(weeks, 10);
+      const currentDate = new Date();
+  
+      // Debug logging
+      alert(`
+        Handling checkdate change:
+        Selected weeks: ${numberOfWeeks}
+        Current date: ${currentDate.toISOString()}
+      `);
+  
+      // Calculate new date
+      const newCheckdate = addWeeksToDate(currentDate, numberOfWeeks);
+      
+      if (newCheckdate) {
+        setCheckdate(newCheckdate);
+        // Confirm the state was updated
+        alert(`Checkdate updated to: ${newCheckdate}`);
+      }
+    } catch (error) {
+      console.error('Error in handleCheckdateChange:', error);
+      alert('Error handling checkdate change: ' + error.message);
+    }
   };
 
   const submitForm = async (e) => {
@@ -46,6 +84,8 @@ const AddFoodPage = ({ addFoodSubmit }) => {
       description,
       checkdate,
     };
+
+    console.log('Submitting new food:', newFood);
 
     await addFoodSubmit(newFood);
     e.target.reset();
@@ -126,7 +166,6 @@ const AddFoodPage = ({ addFoodSubmit }) => {
                 id='upc'
                 name='upc'
                 className='border rounded w-full py-2 px-3'
-                
                 value={upc}
                 onChange={(e) => setUPC(e.target.value)}
               ></textarea>
@@ -170,7 +209,7 @@ const AddFoodPage = ({ addFoodSubmit }) => {
                 name='checkdate'
                 className='border rounded w-full py-2 px-3'
                 placeholder='When should we check the date'
-                value={checkdate}
+                value={selectedWeeks} // Changed from checkdate to selectedWeeks
                 onChange={handleCheckdateChange}
               >
                 <option value="1">1 Week</option>
