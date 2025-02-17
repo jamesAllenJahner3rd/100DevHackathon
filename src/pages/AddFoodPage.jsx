@@ -20,6 +20,16 @@ const AddFoodPage = ({ addFoodSubmit }) => {
 
   const navigate = useNavigate();
 
+  const setScannedData = (data) => {
+    setTitle(data.title);
+    setUPC(data.upc);
+    setBrand(data.brand);
+    setDescription(data.description);
+    setModel(data.model);
+    setCategory(data.category);
+    setShowScanForm(false); // Flip back to manual entry form
+  };
+
   // Shared functions
   const addWeeksToDate = (dateObj, numberOfWeeks) => {
     try {
@@ -39,7 +49,7 @@ const AddFoodPage = ({ addFoodSubmit }) => {
     try {
       // Get the number of weeks from the select option
       const weeks = e.target.value;
-      setSelectedWeeks(weeks); // Update the select value
+      setSelectedWeeks(weeks);
       const numberOfWeeks = parseInt(weeks, 10);
       const currentDate = new Date();
       const newCheckdate = addWeeksToDate(currentDate, numberOfWeeks);
@@ -65,9 +75,9 @@ const AddFoodPage = ({ addFoodSubmit }) => {
         description,
         checkdate,
       };
-  
+
       console.log('Submitting new food:', newFood);
-  
+
       await addFoodSubmit(newFood);
       toast.success('Food Added Successfully');
       navigate('/add-food');
@@ -98,7 +108,7 @@ const AddFoodPage = ({ addFoodSubmit }) => {
             Scan UPC
           </button>
         </div>
-        
+
         {!showScanForm && (
           <AddFoodForm
             formData={{
@@ -130,7 +140,7 @@ const AddFoodPage = ({ addFoodSubmit }) => {
             <h2 className="text-3xl text-center font-semibold mb-6">
               Scan UPC Code
             </h2>
-            <ScanFoodUPC />
+            <ScanFoodUPC setData={setScannedData} />
           </div>
         )}
       </div>

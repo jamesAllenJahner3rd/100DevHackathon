@@ -7,6 +7,13 @@ const FoodListing = ({ food }) => {
 
   let description = food.description;
 
+// Helper function to format the date
+const formatDate = (dateString) => {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const date = new Date(dateString);
+  return date.toLocaleDateString(undefined, options);
+};
+
   if (!showFullDescription) {
     description = description.substring(0, 90) + '...';
   }
@@ -28,7 +35,7 @@ const FoodListing = ({ food }) => {
           {showFullDescription ? 'Less' : 'More'}
         </button>
 
-        <h3 className='text-indigo-500 mb-2'>{food.checkdate} / Year</h3>
+        <h3 className='text-indigo-500 mb-2'>{formatDate(food.checkdate)}</h3>
 
         <div className='border border-gray-100 mb-5'></div>
 
