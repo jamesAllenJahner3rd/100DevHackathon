@@ -1,6 +1,6 @@
 import Hero from '../components/Hero';
 import HomeCards from '../components/HomeCards';
-import Foodlistings from '../components/Foodlistings';
+import Foodlistings from '../components/FoodListings';
 import ViewAllFoods from '../components/ViewAllFoods';
 
 const HomePage = () => {

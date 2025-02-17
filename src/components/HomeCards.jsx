@@ -12,7 +12,7 @@ const HomeCards = () => {
               Browse our  refrigerator foods and start your meal today
             </p>
             <Link
-              to='/jobs'
+              to='/foods'
               className='inline-block bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-700'
             >
               Browse foods
