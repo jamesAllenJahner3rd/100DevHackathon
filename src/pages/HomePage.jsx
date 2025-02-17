@@ -1,6 +1,6 @@
 import Hero from '../components/Hero';
 import HomeCards from '../components/HomeCards';
-import Foodlistings from '../components/FoodListings';
+import FoodListings from '../components/FoodListings';
 import ViewAllFoods from '../components/ViewAllFoods';
 
 const HomePage = () => {
@@ -8,7 +8,7 @@ const HomePage = () => {
     <>
       <Hero />
       <HomeCards />
-      <Foodlistings isHome={true} />
+      <FoodListings isHome={true} />
       <ViewAllFoods />
     </>
   );

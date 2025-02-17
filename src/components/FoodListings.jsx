@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Foodlisting from './Foodlisting';
+import FoodListing from './FoodListing';
 import Spinner from './Spinner';
 import { Client, Databases, Query } from "appwrite";
 
@@ -8,7 +8,7 @@ const client = new Client()
   .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID);
 const databases = new Databases(client);
 
-const Foodlistings = ({ isHome = false }) => {
+const FoodListings = ({ isHome = false }) => {
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -46,7 +46,7 @@ const Foodlistings = ({ isHome = false }) => {
         ) : (
           <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
             {foods.map((food) => (
-              <Foodlisting key={food.$id} food={food} />
+              <FoodListing key={food.$id} food={food} />
             ))}
           </div>
         )}
@@ -55,4 +55,4 @@ const Foodlistings = ({ isHome = false }) => {
   );
 };
 
-export default Foodlistings;
+export default FoodListings;

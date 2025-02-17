@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FaMapMarker } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-const Foodlisting = ({ food }) => {
+const FoodListing = ({ food }) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
 
   let description = food.description;
@@ -48,4 +48,4 @@ const Foodlisting = ({ food }) => {
     </div>
   );
 };
-export default Foodlisting;
+export default FoodListing;
