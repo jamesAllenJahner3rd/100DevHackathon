@@ -5,7 +5,7 @@ const ScanFoodUPC = ({ setData }) => {
   const [isScanning, setIsScanning] = useState(false);
   const beepSound = new Audio("../src/assets/sounds/beep.ogg");
   const beepSoundassets = new Audio("../src/assets/beep.ogg");
-  const beepSoundsrc = new Audio("../src/beep.ogg");
+  const beepSoundsrc = new Audio("../src/beep.mp3");
   const fetchUPCData = async (upc) => {
     try {
       console.log('Fetching UPC:', upc);
