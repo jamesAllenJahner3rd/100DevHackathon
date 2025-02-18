@@ -13,6 +13,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import FoodPage, { foodLoader } from './pages/FoodPage';
 import AddFoodPage from './pages/AddFoodPage.jsx';
 import EditFoodPage from './pages/EditFoodPage';
+import RecipePage from './pages/RecipePage.jsx';
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 import { Client, Databases, ID } from "appwrite";
@@ -126,6 +127,7 @@ const getFood = async (listedFood) => {
           element={<FoodPage deleteFood={deleteFood} />}
           loader={foodLoader}
         />
+        <Route path='/recipe' element={<RecipePage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Route>
     )
