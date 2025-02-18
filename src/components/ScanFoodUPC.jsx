@@ -64,6 +64,8 @@ const ScanFoodUPC = ({ setData }) => {
       beepSound.play().catch(err => console.error('Error playing beep:', err));
       beepSoundassets.play().catch(err => console.error('Error playing beep:', err));
       beepSoundsrc.play().catch(err => console.error('Error playing beep:', err));
+      beepSoundassets.play().catch(err => console.error('Error playing beep:', err));
+      beepSoundsrc.play().catch(err => console.error('Error playing beep:', err));
       setIsScanning(false);
 
       // Fetch and log UPC data
