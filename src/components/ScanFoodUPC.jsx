@@ -4,7 +4,8 @@ import BarcodeScannerComponent from "react-qr-barcode-scanner";
 const ScanFoodUPC = ({ setData }) => {
   const [isScanning, setIsScanning] = useState(false);
   const beepSound = new Audio("../src/assets/sounds/beep.ogg");
-
+  const beepSoundassets = new Audio("../src/assets/beep.ogg");
+  const beepSoundsrc = new Audio("../src/beep.ogg");
   const fetchUPCData = async (upc) => {
     try {
       console.log('Fetching UPC:', upc);
@@ -61,6 +62,8 @@ const ScanFoodUPC = ({ setData }) => {
       const scannedData = result.text;
       console.log('Valid UPC found:', scannedData);
       beepSound.play().catch(err => console.error('Error playing beep:', err));
+      beepSoundassets.play().catch(err => console.error('Error playing beep:', err));
+      beepSoundsrc.play().catch(err => console.error('Error playing beep:', err));
       setIsScanning(false);
 
       // Fetch and log UPC data
