@@ -3,7 +3,7 @@ import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 const ScanFoodUPC = ({ setData }) => {
   const [isScanning, setIsScanning] = useState(false);
-  const beepSound = new Audio("../src/assets/sounds/beep.ogg");
+  const beepSoundRef = React.createRef();
 
   const fetchUPCData = async (upc) => {
     try {
@@ -19,7 +19,7 @@ const ScanFoodUPC = ({ setData }) => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-  
+
       const data = await response.json();
       console.log('Raw API Response:', data);
   
@@ -49,7 +49,6 @@ const ScanFoodUPC = ({ setData }) => {
       return null;
     }
   };
-  
 
   const handleScan = async (err, result) => {
     if (!isScanning) {
@@ -59,7 +58,9 @@ const ScanFoodUPC = ({ setData }) => {
     if (result) {
       const scannedData = result.text;
       console.log('Valid UPC found:', scannedData);
-      beepSound.play().catch(err => console.error('Error playing beep:', err));
+      if (beepSoundRef.current) {
+        beepSoundRef.current.play().catch(err => console.error('Error playing beep:', err));
+      }
       setIsScanning(false);
 
       // Fetch and log UPC data
@@ -73,6 +74,7 @@ const ScanFoodUPC = ({ setData }) => {
 
   return (
     <div className="flex flex-col items-center justify-center">
+      <audio id="beepSound" ref={beepSoundRef} src="../src/assets/sounds/beep.ogg" type="audio/ogg; codecs=vorbis"></audio>
       <div 
         className="w-full max-w-lg mx-auto relative cursor-pointer"
         onClick={toggleScanning}
