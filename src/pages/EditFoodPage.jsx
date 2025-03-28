@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React,{ useState } from 'react';
 import { useParams, useLoaderData, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -15,9 +15,10 @@ const EditFoodPage = ({ updateFoodSubmit }) => {
 
   const navigate = useNavigate();
   const { id } = useParams();
-
+  let  type, checkdateName, checkdateDescription;
   const submitForm = (e) => {
     e.preventDefault();
+  
 
     const updatedFood = {
       id,
@@ -163,10 +164,10 @@ const EditFoodPage = ({ updateFoodSubmit }) => {
                 value={checkdate}
                 onChange={(e) => setCheckdateName(e.target.value)}
               >
-              <option value="9999-12-31 23:59:59">1 Week</option>
-              <option value="9999-12-31 23:59:59">2 Weeks</option>
-              <option value="9999-12-31 23:59:59">1 Month</option>
-              <option value="9999-12-31 23:59:59">6 Month</option>
+              <option value="9999-12-31 23:59:58">1 Week</option>
+              <option value="9999-12-31 23:59:57">2 Weeks</option>
+              <option value="9999-12-31 23:59:56">1 Month</option>
+              <option value="9999-12-31 23:59:55">6 Month</option>
               <option value="9999-12-31 23:59:59">1 Year</option>
             </select>
             </div>
